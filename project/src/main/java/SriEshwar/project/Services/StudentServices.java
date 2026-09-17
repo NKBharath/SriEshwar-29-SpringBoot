@@ -2,7 +2,7 @@ package SriEshwar.project.Services;
 
 
 import SriEshwar.project.Models.Student;
-import SriEshwar.project.StudentRepository;
+import SriEshwar.project.Respository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,5 +24,9 @@ public class StudentServices {
 
     public Student updatestudent (Student data){
         return studentrepository.save(data);
+    }
+
+    public Student getbyid(Long Id){
+            return studentrepository.findById(Id).orElseThrow(()-> new RuntimeException("Todo not found"));
     }
 }

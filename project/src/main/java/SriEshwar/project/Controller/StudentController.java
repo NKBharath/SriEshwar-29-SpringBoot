@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@RequestMapping("/api/student")
 public class StudentController {
     @Autowired
     private StudentServices studentServices;
@@ -26,9 +27,16 @@ public class StudentController {
 
     //path variable
     @GetMapping("getbyid/{id}")
-    String getbyId(@PathVariable long id){
-        return "todo with id" + id;
+    ResponseEntity<?> getbyId(@PathVariable long id){
+        try{
+            Student response = studentServices.getbyid(id);
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        } catch (RuntimeException exception){
+            return new ResponseEntity<>("not found", HttpStatus.NOT_FOUND);
+        }
     }
+
+
     //req body
     @PostMapping("/create")
     ResponseEntity<Student> createtodo(@RequestBody Student body){

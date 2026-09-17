@@ -1,4 +1,4 @@
-package SriEshwar.project;
+package SriEshwar.project.Respository;
 
 import SriEshwar.project.Models.Student;
 import org.springframework.data.jpa.repository.JpaRepository;
