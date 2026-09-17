@@ -11,7 +11,7 @@ public class Student {
     @Id
     @GeneratedValue
     Long Id;
-    String Name;
+        String Name;
     String RollNo;
     String Dept;
     String Email;
