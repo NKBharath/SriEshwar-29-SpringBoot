@@ -3,16 +3,27 @@ package SriEshwar.project.Controller;
 import SriEshwar.project.Models.Student;
 import SriEshwar.project.Services.StudentServices;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 public class StudentController {
     @Autowired
     private StudentServices studentServices;
+
     @GetMapping("/getall")
-    String getall(){
-        return "method to get all";
+    ResponseEntity <List<Student>> getall(){
+        return new ResponseEntity<>(studentServices.getallstudent(), HttpStatus.OK);
     }
+    @PutMapping("/update")
+    ResponseEntity <Student> updatestudent(@RequestBody Student data){
+        return new ResponseEntity<>(studentServices.updatestudent(data), HttpStatus.ACCEPTED);
+    }
+
+
     //path variable
     @GetMapping("getbyid/{id}")
     String getbyId(@PathVariable long id){
@@ -20,8 +31,8 @@ public class StudentController {
     }
     //req body
     @PostMapping("/create")
-    Student createtodo(@RequestBody Student body){
-       return studentServices.createstudent(body);
+    ResponseEntity<Student> createtodo(@RequestBody Student body){
+       return new ResponseEntity<>(studentServices.createstudent(body), HttpStatus.CREATED);
     }
     //request param
     @GetMapping
